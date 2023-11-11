@@ -22,4 +22,8 @@ public class MenuManager {
             addMenu(new Menu(menuProperty.menuName, menuProperty.menuCost, menuProperty.menuType));
         }
     }
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
 }

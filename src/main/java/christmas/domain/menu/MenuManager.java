@@ -15,7 +15,7 @@ public class MenuManager {
         validate(orderMenus);
     }
 
-    private void addMenu(Menu menu) {
+    public void addMenu(Menu menu) {
         menus.add(menu);
     }
 

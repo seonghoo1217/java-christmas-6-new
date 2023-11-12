@@ -15,12 +15,13 @@ public class OutputView {
         outputForLineBreak();
     }
 
-    private void outputForLineBreak() {
-        System.out.println();
-    }
-
     public void outputForOrderMenus(Map<String, Integer> orderStatus) {
         System.out.println(ORDER_MENUS);
         orderStatus.keySet().forEach(key -> System.out.println(key + " " + orderStatus.get(key) + "개"));
+        outputForLineBreak();
+    }
+
+    private void outputForLineBreak() {
+        System.out.println();
     }
 }

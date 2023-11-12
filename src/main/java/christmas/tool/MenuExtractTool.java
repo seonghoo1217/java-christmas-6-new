@@ -39,7 +39,7 @@ public class MenuExtractTool {
         String[] orderItems = orderMenus.split(",");
 
         for (String item : orderItems) {
-            orderCount += Long.parseLong(item.split("-")[1]);
+            orderCount = Long.parseLong(item.split("-")[1]);
         }
         if (orderCount > Integer.MAX_VALUE) {
             throw new IllegalArgumentException(ERROR_TOO_MANY_ORDER);

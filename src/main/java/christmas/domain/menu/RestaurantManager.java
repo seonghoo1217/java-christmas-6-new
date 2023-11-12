@@ -6,11 +6,11 @@ import christmas.validation.MenuValidation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuManager {
+public class RestaurantManager {
 
     private static final List<Menu> menus = new ArrayList<>();
 
-    public MenuManager(String orderMenus) {
+    public RestaurantManager(String orderMenus) {
         initializeRestaurantMenu();
         validate(orderMenus);
     }

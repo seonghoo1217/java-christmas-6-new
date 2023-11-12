@@ -1,8 +1,8 @@
 package christmas.validation;
 
 import christmas.domain.menu.Menu;
-import christmas.domain.menu.MenuManager;
 import christmas.domain.menu.MenuType;
+import christmas.domain.menu.RestaurantManager;
 import christmas.tool.MenuExtractTool;
 
 import java.util.HashSet;
@@ -63,7 +63,7 @@ public class MenuValidation {
     }
 
     private List<String> getMenuNames() {
-        return MenuManager.getMenus().stream().map(Menu::getName).toList();
+        return RestaurantManager.getMenus().stream().map(Menu::getName).toList();
     }
 
     private boolean menusIsOnlyBeverage(List<MenuType> menuTypes) {

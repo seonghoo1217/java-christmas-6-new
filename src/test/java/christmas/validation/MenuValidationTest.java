@@ -1,6 +1,6 @@
 package christmas.validation;
 
-import christmas.domain.menu.MenuManager;
+import christmas.domain.menu.RestaurantManager;
 import christmas.property.ErrorProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class MenuValidationTest {
     void 메뉴_주문_입력_시_옳바르지_못한_양식_입력한_경우(String targetOrder) {
         //when && then
         assertThatThrownBy(() -> {
-                    new MenuManager(targetOrder);
+                    new RestaurantManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_NOT_CORRECT_FORMAT);
@@ -35,7 +35,7 @@ public class MenuValidationTest {
         String targetOrder = "해산물파스타-1,초코케이크-1,해산물파스타-1";
         //when && then
         assertThatThrownBy(() -> {
-                    new MenuManager(targetOrder);
+                    new RestaurantManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_IS_DUPLICATE);
@@ -47,7 +47,7 @@ public class MenuValidationTest {
         String targetOrder = "해산물파스타-99";
         //when & then
         assertThatThrownBy(() -> {
-                    new MenuManager(targetOrder);
+                    new RestaurantManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_COUNT);
@@ -59,7 +59,7 @@ public class MenuValidationTest {
         String targetOrder = "해산물파스타-0";
         //when & then
         assertThatThrownBy(() -> {
-                    new MenuManager(targetOrder);
+                    new RestaurantManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_COUNT);
@@ -72,7 +72,7 @@ public class MenuValidationTest {
 
         //when & then
         assertThatThrownBy(() -> {
-                    new MenuManager(targetOrder);
+                    new RestaurantManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_MENU_IS_NOT_EXIST);
@@ -83,7 +83,7 @@ public class MenuValidationTest {
     void 메뉴_주문_입력_시_음료수만_주문한_경우(String targetOrder) {
         //when & then
         assertThatThrownBy(() -> {
-                    new MenuManager(targetOrder);
+                    new RestaurantManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_ONLY_BEVERAGE);

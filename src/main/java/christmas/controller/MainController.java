@@ -19,6 +19,6 @@ public class MainController {
         Calendar calendar = inputView.readVisitDate();
         RestaurantManager restaurantManager = inputView.readOrderMenu();
         outputView.outputForEventNotice();
-        outputView.outputForOrderMenus(restaurantManager.getOrder().getOrderStatus());
+        outputView.outputForOrderMenus(restaurantManager.getOrder().orderStatus());
     }
 }

@@ -63,7 +63,7 @@ public class MenuValidation {
     }
 
     private List<String> getMenuNames() {
-        return RestaurantManager.getMenus().stream().map(Menu::getName).toList();
+        return RestaurantManager.getMenus().stream().map(Menu::name).toList();
     }
 
     private boolean menusIsOnlyBeverage(List<MenuType> menuTypes) {

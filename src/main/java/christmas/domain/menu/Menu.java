@@ -1,26 +1,5 @@
 package christmas.domain.menu;
 
-public class Menu {
+public record Menu(String name, Integer cost, MenuType menuType) {
 
-    private String name;
-    private Integer cost;
-    private MenuType menuType;
-
-    public Menu(String name, Integer cost, MenuType menuType) {
-        this.name = name;
-        this.cost = cost;
-        this.menuType = menuType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public MenuType getMenuType() {
-        return menuType;
-    }
-
-    public Integer getCost() {
-        return cost;
-    }
 }

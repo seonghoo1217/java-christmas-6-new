@@ -15,8 +15,8 @@ public class MenuExtractTool {
                 .map(item -> item.split("-")[0])
                 .flatMap(menuName ->
                         RestaurantManager.getMenus().stream()
-                                .filter(menu -> menu.getName().equals(menuName))
-                                .map(Menu::getMenuType))
+                                .filter(menu -> menu.name().equals(menuName))
+                                .map(Menu::menuType))
                 .collect(Collectors.toList());
     }
 
@@ -57,8 +57,8 @@ public class MenuExtractTool {
     public Integer extractTotalAmount(String orderMenus) {
         List<String> menuNames = extractMenuNames(orderMenus);
         return RestaurantManager.getMenus().stream()
-                .filter(menu -> menuNames.contains(menu.getName()))
-                .map(Menu::getCost)
+                .filter(menu -> menuNames.contains(menu.name()))
+                .map(Menu::cost)
                 .reduce(0, Integer::sum);
     }
 }

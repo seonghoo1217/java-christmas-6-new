@@ -2,6 +2,7 @@ package christmas.validation;
 
 import christmas.property.ErrorProperty;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -25,5 +26,17 @@ public class MenuValidationTest {
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_NOT_CORRECT_FORMAT);
+    }
+
+    @Test
+    void 메뉴_주문_입력_시_중복된_메뉴_입력한_경우() {
+        //given
+        String targetOrder = "해산물파스타-1,초코케이크-1,해산물파스타-1";
+        //when
+        assertThatThrownBy(() -> {
+                    menuValidation.verifyForMenus(targetOrder);
+                }
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorProperty.ERROR_ORDER_IS_DUPLICATE);
     }
 }

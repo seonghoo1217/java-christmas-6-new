@@ -2,6 +2,9 @@ package christmas.validation;
 
 import christmas.property.ErrorProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuValidation {
 
     public static void verifyForMenus(String menus) {
@@ -14,4 +17,15 @@ public class MenuValidation {
         }
     }
 
+    static List<String> extractMenuNames(String orderMenus) {
+        List<String> menuNames = new ArrayList<>();
+        String[] orderItems = orderMenus.split(",");
+
+        for (String item : orderItems) {
+            String menuName = item.split("-")[0];
+            menuNames.add(menuName);
+        }
+
+        return menuNames;
+    }
 }

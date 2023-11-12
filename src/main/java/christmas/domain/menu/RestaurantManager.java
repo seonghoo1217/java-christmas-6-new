@@ -36,4 +36,8 @@ public class RestaurantManager {
     public static List<Menu> getMenus() {
         return menus;
     }
+
+    public Order getOrder() {
+        return order;
+    }
 }

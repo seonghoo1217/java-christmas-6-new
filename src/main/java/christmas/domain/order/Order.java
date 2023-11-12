@@ -2,6 +2,7 @@ package christmas.domain.order;
 
 import christmas.tool.MenuExtractTool;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class Order {
@@ -22,5 +23,13 @@ public class Order {
 
     private Integer parsingTotalAmount(String orderMenus) {
         return menuExtractTool.extractTotalAmount(orderMenus);
+    }
+
+    public Map<String, Integer> getOrderStatus() {
+        return Collections.unmodifiableMap(orderStatus);
+    }
+
+    public Integer getTotalAmount() {
+        return totalAmount;
     }
 }

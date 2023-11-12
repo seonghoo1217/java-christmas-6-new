@@ -7,12 +7,15 @@ import java.util.HashSet;
 import java.util.List;
 
 import static christmas.property.ErrorProperty.*;
+import static christmas.validation.property.ValidationProperty.MAX_ORDER;
+import static christmas.validation.property.ValidationProperty.MIN_ORDER;
 
 public class MenuValidation {
 
     public static void verifyForMenus(String orderMenus) {
         verifyForOrderCorrectFormat(orderMenus);
         verifyForOrderMenuDuplicate(orderMenus);
+        verifyForOrderCount(orderMenus);
     }
 
     static void verifyForOrderCorrectFormat(String orderMenus) {
@@ -37,6 +40,12 @@ public class MenuValidation {
         }
     }
 
+    static void verifyForOrderCount(String orderMenus) {
+        if (extractOrderCount(orderMenus)) {
+            throw new IllegalArgumentException(ERROR_ORDER_COUNT);
+        }
+    }
+
     static List<String> extractMenuNames(String orderMenus) {
         List<String> menuNames = new ArrayList<>();
         String[] orderItems = orderMenus.split(",");
@@ -47,5 +56,15 @@ public class MenuValidation {
         }
 
         return menuNames;
+    }
+
+    static boolean extractOrderCount(String orderMenus) {
+        int orderCount = 0;
+        String[] orderItems = orderMenus.split(",");
+
+        for (String item : orderItems) {
+            orderCount += Integer.parseInt(item.split("-")[1]);
+        }
+        return orderCount < MIN_ORDER || orderCount > MAX_ORDER;
     }
 }

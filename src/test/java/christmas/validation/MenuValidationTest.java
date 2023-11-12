@@ -64,4 +64,17 @@ public class MenuValidationTest {
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_COUNT);
     }
+
+    @Test
+    void 메뉴_주문_입력_시_존재하지_않는_메뉴_주문한_경우() {
+        //given
+        String targetOrder = "해산물파스타-1,우아한테크코스-2";
+
+        //when & then
+        assertThatThrownBy(() -> {
+                    new MenuManager(targetOrder);
+                }
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorProperty.ERROR_ORDER_MENU_IS_NOT_EXIST);
+    }
 }

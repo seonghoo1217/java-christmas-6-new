@@ -2,8 +2,9 @@ package christmas.validation;
 
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuManager;
+import christmas.domain.menu.MenuType;
+import christmas.tool.MenuExtractTool;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -13,10 +14,13 @@ import static christmas.validation.property.ValidationProperty.MIN_ORDER;
 
 public class MenuValidation {
 
+    private static MenuExtractTool menuExtractTool = new MenuExtractTool();
+
     public void verifyForMenus(String orderMenus) {
         verifyForOrderCorrectFormat(orderMenus);
         verifyForOrderMenuDuplicate(orderMenus);
         verifyForOrderCount(orderMenus);
+        verifyForOrderOnlyBeverage(orderMenus);
     }
 
     private void verifyForOrderCorrectFormat(String orderMenus) {
@@ -26,7 +30,7 @@ public class MenuValidation {
     }
 
     private void verifyForOrderMenuDuplicate(String orderMenus) {
-        List<String> menuNames = extractMenuNames(orderMenus);
+        List<String> menuNames = menuExtractTool.extractMenuNames(orderMenus);
         if (menuNames.size() != new HashSet<>(menuNames).size()) {
             throw new IllegalArgumentException(ERROR_ORDER_IS_DUPLICATE);
         }
@@ -41,31 +45,14 @@ public class MenuValidation {
 
 
     private void verifyForOrderCount(String orderMenus) {
-        if (extractOrderCount(orderMenus)) {
+        int orderCount = menuExtractTool.extractOrderCount(orderMenus);
+        if (orderCount < MIN_ORDER || orderCount > MAX_ORDER) {
             throw new IllegalArgumentException(ERROR_ORDER_COUNT);
         }
     }
 
-    private List<String> extractMenuNames(String orderMenus) {
-        List<String> menuNames = new ArrayList<>();
-        String[] orderItems = orderMenus.split(",");
-
-        for (String item : orderItems) {
-            String menuName = item.split("-")[0];
-            menuNames.add(menuName);
-        }
-
-        return menuNames;
-    }
-
-    private boolean extractOrderCount(String orderMenus) {
-        int orderCount = 0;
-        String[] orderItems = orderMenus.split(",");
-
-        for (String item : orderItems) {
-            orderCount += Integer.parseInt(item.split("-")[1]);
-        }
-        return orderCount < MIN_ORDER || orderCount > MAX_ORDER;
+    private void verifyForOrderOnlyBeverage(String orderMenus) {
+        List<MenuType> menuTypes = menuExtractTool.extractMenuType(orderMenus);
     }
 
     private boolean menuNameIsExist(List<String> orderMenuNames) {

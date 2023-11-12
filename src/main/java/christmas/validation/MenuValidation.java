@@ -53,6 +53,9 @@ public class MenuValidation {
 
     private void verifyForOrderOnlyBeverage(String orderMenus) {
         List<MenuType> menuTypes = menuExtractTool.extractMenuType(orderMenus);
+        if (menusIsOnlyBeverage(menuTypes)) {
+            throw new IllegalArgumentException(ERROR_ORDER_ONLY_BEVERAGE);
+        }
     }
 
     private boolean menuNameIsExist(List<String> orderMenuNames) {
@@ -61,5 +64,9 @@ public class MenuValidation {
 
     private List<String> getMenuNames() {
         return MenuManager.getMenus().stream().map(Menu::getName).toList();
+    }
+
+    private boolean menusIsOnlyBeverage(List<MenuType> menuTypes) {
+        return menuTypes.stream().allMatch(menuType -> menuType == MenuType.BEVERAGE);
     }
 }

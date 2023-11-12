@@ -1,12 +1,10 @@
 package christmas.tool;
 
 import christmas.domain.menu.Menu;
-import christmas.domain.menu.MenuManager;
 import christmas.domain.menu.MenuType;
+import christmas.domain.menu.RestaurantManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static christmas.property.ErrorProperty.ERROR_TOO_MANY_ORDER;
@@ -16,7 +14,7 @@ public class MenuExtractTool {
         return Arrays.stream(orderMenus.split(","))
                 .map(item -> item.split("-")[0])
                 .flatMap(menuName ->
-                        MenuManager.getMenus().stream()
+                        RestaurantManager.getMenus().stream()
                                 .filter(menu -> menu.getName().equals(menuName))
                                 .map(Menu::getMenuType))
                 .collect(Collectors.toList());
@@ -45,5 +43,22 @@ public class MenuExtractTool {
             throw new IllegalArgumentException(ERROR_TOO_MANY_ORDER);
         }
         return (int) orderCount;
+    }
+
+    public Map<String, Integer> extractOrderStatus(String orderMenus) {
+        Map<String, Integer> orderStatus = new LinkedHashMap<>();
+        String[] orderItems = orderMenus.split(",");
+        for (String item : orderItems) {
+            orderStatus.put(item.split("-")[0], Integer.parseInt(item.split("-")[1]));
+        }
+        return orderStatus;
+    }
+
+    public Integer extractTotalAmount(String orderMenus) {
+        List<String> menuNames = extractMenuNames(orderMenus);
+        return RestaurantManager.getMenus().stream()
+                .filter(menu -> menuNames.contains(menu.getName()))
+                .map(Menu::getCost)
+                .reduce(0, Integer::sum);
     }
 }

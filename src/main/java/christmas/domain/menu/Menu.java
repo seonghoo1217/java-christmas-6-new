@@ -11,4 +11,8 @@ public class Menu {
         this.cost = cost;
         this.menuType = menuType;
     }
+
+    public String getName() {
+        return name;
+    }
 }

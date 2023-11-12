@@ -1,5 +1,6 @@
 package christmas.validation;
 
+import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuManager;
 
 import java.util.ArrayList;
@@ -33,8 +34,9 @@ public class MenuValidation {
     }
 
     private void verifyForOrderMenuExist(List<String> menuNames) {
+        List<Menu> menus = MenuManager.getMenus();
         for (String name : menuNames) {
-            if (!MenuManager.getMenus().contains(name)) {
+            if (!menuNameIsExist(name, menus)) {
                 throw new IllegalArgumentException(ERROR_ORDER_MENU_IS_NOT_EXIST);
             }
         }
@@ -66,5 +68,10 @@ public class MenuValidation {
             orderCount += Integer.parseInt(item.split("-")[1]);
         }
         return orderCount < MIN_ORDER || orderCount > MAX_ORDER;
+    }
+
+    private boolean menuNameIsExist(String name, List<Menu> menus) {
+        return menus.stream()
+                .anyMatch(menu -> menu.getName().equals(name));
     }
 }

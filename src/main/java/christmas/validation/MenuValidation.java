@@ -10,13 +10,13 @@ import static christmas.property.ErrorProperty.*;
 
 public class MenuValidation {
 
-    public static void verifyForMenus(String menus) {
-        verifyForOrderCorrectFormat(menus);
-        verifyForOrderMenuDuplicate(menus);
+    public static void verifyForMenus(String orderMenus) {
+        verifyForOrderCorrectFormat(orderMenus);
+        verifyForOrderMenuDuplicate(orderMenus);
     }
 
-    static void verifyForOrderCorrectFormat(String menus) {
-        if (!menus.matches("^([가-힣a-zA-Z0-9]+-\\d+)(,[가-힣a-zA-Z0-9]+-\\d+)*$")) {
+    static void verifyForOrderCorrectFormat(String orderMenus) {
+        if (!orderMenus.matches("^([가-힣a-zA-Z0-9]+-\\d+)(,[가-힣a-zA-Z0-9]+-\\d+)*$")) {
             throw new IllegalArgumentException(ERROR_ORDER_NOT_CORRECT_FORMAT);
         }
     }

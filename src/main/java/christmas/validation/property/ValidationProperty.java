@@ -6,4 +6,6 @@ public class ValidationProperty {
 
     public static final Integer MIN_ORDER = 1;
     public static final Integer MAX_ORDER = 20;
+
+    public static final String DELIMITER = " ";
 }

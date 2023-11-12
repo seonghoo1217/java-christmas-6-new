@@ -9,14 +9,14 @@ import java.util.HashSet;
 import java.util.List;
 
 import static christmas.property.ErrorProperty.*;
-import static christmas.validation.property.ValidationProperty.MAX_ORDER;
-import static christmas.validation.property.ValidationProperty.MIN_ORDER;
+import static christmas.validation.property.ValidationProperty.*;
 
 public class MenuValidation {
 
     private static MenuExtractTool menuExtractTool = new MenuExtractTool();
 
-    public void verifyForMenus(String orderMenus) {
+    public void verifyForMenus(String inputOrderMenus) {
+        String orderMenus = inputOrderMenus.replaceAll(DELIMITER, "");
         verifyForOrderCorrectFormat(orderMenus);
         verifyForOrderMenuDuplicate(orderMenus);
         verifyForOrderCount(orderMenus);

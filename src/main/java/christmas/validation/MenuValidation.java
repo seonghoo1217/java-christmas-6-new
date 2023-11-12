@@ -33,14 +33,13 @@ public class MenuValidation {
         verifyForOrderMenuExist(menuNames);
     }
 
-    private void verifyForOrderMenuExist(List<String> menuNames) {
-        List<Menu> menus = MenuManager.getMenus();
-        for (String name : menuNames) {
-            if (!menuNameIsExist(name, menus)) {
-                throw new IllegalArgumentException(ERROR_ORDER_MENU_IS_NOT_EXIST);
-            }
+    private void verifyForOrderMenuExist(List<String> orderMenuNames) {
+        List<String> menuNames = MenuManager.getMenus().stream().map(Menu::getName).toList();
+        if (!menuNameIsExist(menuNames, orderMenuNames)) {
+            throw new IllegalArgumentException(ERROR_ORDER_MENU_IS_NOT_EXIST);
         }
     }
+
 
     private void verifyForOrderCount(String orderMenus) {
         if (extractOrderCount(orderMenus)) {
@@ -70,8 +69,10 @@ public class MenuValidation {
         return orderCount < MIN_ORDER || orderCount > MAX_ORDER;
     }
 
-    private boolean menuNameIsExist(String name, List<Menu> menus) {
-        return menus.stream()
-                .anyMatch(menu -> menu.getName().equals(name));
+    private boolean menuNameIsExist(List<String> menuNames, List<String> orderMenuNames) {
+        for (String orderMenu : orderMenuNames) {
+            return menuNames.contains(orderMenu);
+        }
+        return false;
     }
 }

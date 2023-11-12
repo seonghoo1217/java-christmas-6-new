@@ -12,19 +12,19 @@ import static christmas.validation.property.ValidationProperty.MIN_ORDER;
 
 public class MenuValidation {
 
-    public static void verifyForMenus(String orderMenus) {
+    public void verifyForMenus(String orderMenus) {
         verifyForOrderCorrectFormat(orderMenus);
         verifyForOrderMenuDuplicate(orderMenus);
         verifyForOrderCount(orderMenus);
     }
 
-    static void verifyForOrderCorrectFormat(String orderMenus) {
+    private void verifyForOrderCorrectFormat(String orderMenus) {
         if (!orderMenus.matches("^([가-힣a-zA-Z0-9]+-\\d+)(,[가-힣a-zA-Z0-9]+-\\d+)*$")) {
             throw new IllegalArgumentException(ERROR_ORDER_NOT_CORRECT_FORMAT);
         }
     }
 
-    static void verifyForOrderMenuDuplicate(String orderMenus) {
+    private void verifyForOrderMenuDuplicate(String orderMenus) {
         List<String> menuNames = extractMenuNames(orderMenus);
         if (menuNames.size() != new HashSet<>(menuNames).size()) {
             throw new IllegalArgumentException(ERROR_ORDER_IS_DUPLICATE);
@@ -32,7 +32,7 @@ public class MenuValidation {
         verifyForOrderMenuExist(menuNames);
     }
 
-    static void verifyForOrderMenuExist(List<String> menuNames) {
+    private void verifyForOrderMenuExist(List<String> menuNames) {
         for (String name : menuNames) {
             if (!MenuManager.getMenus().contains(name)) {
                 throw new IllegalArgumentException(ERROR_ORDER_MENU_IS_NOT_EXIST);
@@ -40,13 +40,13 @@ public class MenuValidation {
         }
     }
 
-    static void verifyForOrderCount(String orderMenus) {
+    private void verifyForOrderCount(String orderMenus) {
         if (extractOrderCount(orderMenus)) {
             throw new IllegalArgumentException(ERROR_ORDER_COUNT);
         }
     }
 
-    static List<String> extractMenuNames(String orderMenus) {
+    private List<String> extractMenuNames(String orderMenus) {
         List<String> menuNames = new ArrayList<>();
         String[] orderItems = orderMenus.split(",");
 
@@ -58,7 +58,7 @@ public class MenuValidation {
         return menuNames;
     }
 
-    static boolean extractOrderCount(String orderMenus) {
+    private boolean extractOrderCount(String orderMenus) {
         int orderCount = 0;
         String[] orderItems = orderMenus.split(",");
 

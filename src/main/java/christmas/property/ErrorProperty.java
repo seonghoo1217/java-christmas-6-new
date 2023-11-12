@@ -8,4 +8,5 @@ public class ErrorProperty {
     public static final String ERROR_ORDER_IS_DUPLICATE = errorPrefix + "주문시 메뉴가 중복되어서는 안됩니다.";
     public static final String ERROR_ORDER_MENU_IS_NOT_EXIST = errorPrefix + "주문하신 메뉴가 존재하지 않습니다. 존재하는 메뉴로 주문하여 주세요.";
     public static final String ERROR_ORDER_COUNT = errorPrefix + "주문은 최소 1개 최대 20개를 주문해 주세요.";
+    public static final String ERROR_TOO_MANY_ORDER = errorPrefix + "그렇게 많은 주문은 하실 수 없습니다";
 }

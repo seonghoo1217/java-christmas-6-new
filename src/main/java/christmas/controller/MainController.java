@@ -18,5 +18,6 @@ public class MainController {
     public void restaurantOpening() {
         Calendar calendar = inputView.readVisitDate();
         RestaurantManager restaurantManager = inputView.readOrderMenu();
+        outputView.outputForEventNotice();
     }
 }

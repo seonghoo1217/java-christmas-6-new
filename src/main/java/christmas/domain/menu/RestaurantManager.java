@@ -1,6 +1,7 @@
 package christmas.domain.menu;
 
 import christmas.domain.menu.property.MenuProperty;
+import christmas.domain.order.Order;
 import christmas.validation.MenuValidation;
 
 import java.util.ArrayList;
@@ -9,10 +10,12 @@ import java.util.List;
 public class RestaurantManager {
 
     private static final List<Menu> menus = new ArrayList<>();
+    private final Order order;
 
     public RestaurantManager(String orderMenus) {
         initializeRestaurantMenu();
         validate(orderMenus);
+        order = new Order(orderMenus);
     }
 
     public void addMenu(Menu menu) {

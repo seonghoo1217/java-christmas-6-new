@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.calender.Calendar;
+import christmas.domain.menu.MenuManager;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -16,6 +17,6 @@ public class MainController {
 
     public void restaurantOpening() {
         Calendar calendar = inputView.readVisitDate();
-
+        MenuManager menuManager = inputView.readOrderMenu();
     }
 }

@@ -1,5 +1,6 @@
 package christmas.validation;
 
+import christmas.domain.menu.MenuManager;
 import christmas.property.ErrorProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class MenuValidationTest {
     @ParameterizedTest
     @ValueSource(strings = {"초코케이크-1,해산물파스타-1,", "초코케이크1,해산물파스타-1", "초코케이크-1해산물파스타1"})
     void 메뉴_주문_입력_시_옳바르지_못한_양식_입력한_경우(String targetOrder) {
-        //when
+        //when && then
         assertThatThrownBy(() -> {
                     menuValidation.verifyForMenus(targetOrder);
                 }
@@ -32,11 +33,23 @@ public class MenuValidationTest {
     void 메뉴_주문_입력_시_중복된_메뉴_입력한_경우() {
         //given
         String targetOrder = "해산물파스타-1,초코케이크-1,해산물파스타-1";
-        //when
+        //when && then
         assertThatThrownBy(() -> {
                     menuValidation.verifyForMenus(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_IS_DUPLICATE);
+    }
+
+    @Test
+    void 메뉴_주문_입력_시_개수_초과_주문한_경우() {
+        //given
+        String targetOrder = "해산물파스타-99";
+        //when & then
+        assertThatThrownBy(() -> {
+                    new MenuManager(targetOrder);
+                }
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorProperty.ERROR_ORDER_COUNT);
     }
 }

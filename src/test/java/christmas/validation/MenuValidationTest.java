@@ -77,4 +77,15 @@ public class MenuValidationTest {
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_MENU_IS_NOT_EXIST);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"제로콜라-1,레드와인-1", "레드와인-1", "제로콜라-1,샴페인-1"})
+    void 메뉴_주문_입력_시_음료수만_주문한_경우(String targetOrder) {
+        //when & then
+        assertThatThrownBy(() -> {
+                    new MenuManager(targetOrder);
+                }
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorProperty.ERROR_ORDER_ONLY_BEVERAGE);
+    }
 }

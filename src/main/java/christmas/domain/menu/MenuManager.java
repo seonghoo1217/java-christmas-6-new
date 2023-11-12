@@ -1,16 +1,18 @@
 package christmas.domain.menu;
 
 import christmas.domain.menu.property.MenuProperty;
+import christmas.validation.MenuValidation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuManager {
 
-    private List<Menu> menus = new ArrayList<>();
+    private static final List<Menu> menus = new ArrayList<>();
 
-    public MenuManager() {
+    public MenuManager(String orderMenus) {
         initializeRestaurantMenu();
+        validate(orderMenus);
     }
 
     private void addMenu(Menu menu) {
@@ -23,7 +25,12 @@ public class MenuManager {
         }
     }
 
-    public List<Menu> getMenus() {
+    private void validate(String orderMenus) {
+        MenuValidation menuValidation = new MenuValidation();
+        menuValidation.verifyForMenus(orderMenus);
+    }
+
+    public static List<Menu> getMenus() {
         return menus;
     }
 }

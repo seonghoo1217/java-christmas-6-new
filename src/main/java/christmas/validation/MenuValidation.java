@@ -70,9 +70,6 @@ public class MenuValidation {
     }
 
     private boolean menuNameIsExist(List<String> menuNames, List<String> orderMenuNames) {
-        for (String orderMenu : orderMenuNames) {
-            return menuNames.contains(orderMenu);
-        }
-        return false;
+        return orderMenuNames.stream().allMatch(menuNames::contains);
     }
 }

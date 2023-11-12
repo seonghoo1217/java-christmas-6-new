@@ -34,8 +34,7 @@ public class MenuValidation {
     }
 
     private void verifyForOrderMenuExist(List<String> orderMenuNames) {
-        List<String> menuNames = MenuManager.getMenus().stream().map(Menu::getName).toList();
-        if (!menuNameIsExist(menuNames, orderMenuNames)) {
+        if (!menuNameIsExist(orderMenuNames)) {
             throw new IllegalArgumentException(ERROR_ORDER_MENU_IS_NOT_EXIST);
         }
     }
@@ -69,7 +68,11 @@ public class MenuValidation {
         return orderCount < MIN_ORDER || orderCount > MAX_ORDER;
     }
 
-    private boolean menuNameIsExist(List<String> menuNames, List<String> orderMenuNames) {
-        return orderMenuNames.stream().allMatch(menuNames::contains);
+    private boolean menuNameIsExist(List<String> orderMenuNames) {
+        return orderMenuNames.stream().allMatch(getMenuNames()::contains);
+    }
+
+    private List<String> getMenuNames() {
+        return MenuManager.getMenus().stream().map(Menu::getName).toList();
     }
 }

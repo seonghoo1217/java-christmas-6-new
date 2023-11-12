@@ -20,5 +20,6 @@ public class MainController {
         RestaurantManager restaurantManager = inputView.readOrderMenu();
         outputView.outputForEventNotice();
         outputView.outputForOrderMenus(restaurantManager.getOrder().orderStatus());
+        outputView.outputForTotalAmount(restaurantManager.getOrder().totalAmount());
     }
 }

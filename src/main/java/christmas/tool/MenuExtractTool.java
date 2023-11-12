@@ -54,11 +54,18 @@ public class MenuExtractTool {
         return orderStatus;
     }
 
-    public Integer extractTotalAmount(String orderMenus) {
+    public Integer extractTotalAmount(Map<String, Integer> orderStatus, String orderMenus) {
+        LinkedList<Menu> menus = extractMenus(orderMenus);
+        return menus.stream()
+                .filter(m -> orderStatus.containsKey(m.name()))
+                .mapToInt(m -> m.cost() * orderStatus.get(m.name()))
+                .sum();
+    }
+
+    public LinkedList<Menu> extractMenus(String orderMenus) {
         List<String> menuNames = extractMenuNames(orderMenus);
         return RestaurantManager.getMenus().stream()
                 .filter(menu -> menuNames.contains(menu.name()))
-                .map(Menu::cost)
-                .reduce(0, Integer::sum);
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

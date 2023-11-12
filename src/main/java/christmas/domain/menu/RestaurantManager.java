@@ -7,6 +7,7 @@ import christmas.validation.MenuValidation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RestaurantManager {
 
@@ -18,7 +19,8 @@ public class RestaurantManager {
     public RestaurantManager(String orderMenus) {
         initializeRestaurantMenu();
         validate(orderMenus);
-        order = new Order(menuExtractTool.extractOrderStatus(orderMenus), menuExtractTool.extractTotalAmount(orderMenus));
+        Map<String, Integer> orderStatus = menuExtractTool.extractOrderStatus(orderMenus);
+        order = new Order(orderStatus, menuExtractTool.extractTotalAmount(orderStatus, orderMenus));
     }
 
     public void addMenu(Menu menu) {

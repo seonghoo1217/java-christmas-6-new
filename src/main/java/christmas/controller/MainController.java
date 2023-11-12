@@ -1,10 +1,21 @@
 package christmas.controller;
 
+import christmas.domain.calender.Calendar;
 import christmas.view.InputView;
+import christmas.view.OutputView;
 
 public class MainController {
 
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public MainController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
     public void restaurantOpening() {
-        InputView.readVisitDate();
+        Calendar calendar = inputView.readVisitDate();
+
     }
 }

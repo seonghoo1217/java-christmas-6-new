@@ -23,7 +23,7 @@ public class MenuValidationTest {
     void 메뉴_주문_입력_시_옳바르지_못한_양식_입력한_경우(String targetOrder) {
         //when && then
         assertThatThrownBy(() -> {
-                    menuValidation.verifyForMenus(targetOrder);
+                    new MenuManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_NOT_CORRECT_FORMAT);
@@ -35,7 +35,7 @@ public class MenuValidationTest {
         String targetOrder = "해산물파스타-1,초코케이크-1,해산물파스타-1";
         //when && then
         assertThatThrownBy(() -> {
-                    menuValidation.verifyForMenus(targetOrder);
+                    new MenuManager(targetOrder);
                 }
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorProperty.ERROR_ORDER_IS_DUPLICATE);

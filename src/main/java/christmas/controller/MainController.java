@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.core.EventPolicy;
 import christmas.domain.calender.Calendar;
 import christmas.domain.menu.RestaurantManager;
 import christmas.view.InputView;
@@ -9,10 +10,12 @@ public class MainController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final EventPolicy eventPolicy;
 
-    public MainController(InputView inputView, OutputView outputView) {
+    public MainController(InputView inputView, OutputView outputView, EventPolicy eventPolicy) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.eventPolicy = eventPolicy;
     }
 
     public void restaurantOpening() {

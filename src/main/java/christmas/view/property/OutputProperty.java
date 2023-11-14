@@ -9,4 +9,6 @@ public class OutputProperty {
     public static final String PROMOTION_AMOUNT = "<총혜택 금액>";
     public static final String AFTER_PAYMENT_AMOUNT = "<할인 후 예상 결제 금액>";
     public static final String BADGE = "<12월 이벤트 배지>";
+    public static final String TOTAL_PROMOTION_AMOUNT = "<총혜택 금액>";
+    public static final String PROMOTION_AMOUNT_PREFIX = "-";
 }

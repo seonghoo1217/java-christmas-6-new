@@ -68,4 +68,11 @@ public class MenuExtractTool {
                 .filter(menu -> menuNames.contains(menu.name()))
                 .collect(Collectors.toCollection(LinkedList::new));
     }
+
+    public Menu extractMenuByMenuName(List<Menu> menus, String menuName) {
+        return menus.stream()
+                .filter(menu -> menu.name().equals(menuName))
+                .findFirst()
+                .orElse(null);
+    }
 }

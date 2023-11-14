@@ -45,4 +45,18 @@ public class RestaurantManager {
     public Order getOrder() {
         return order;
     }
+
+    public Integer promotionDiscountWeekOfDay(MenuType menuType, Integer cost) {
+        Map<String, Integer> orderStatus = order.orderStatus();
+        int totalOrderCount = 0;
+        for (Map.Entry<String, Integer> entry : orderStatus.entrySet()) {
+            String menuName = entry.getKey();
+            Integer count = entry.getValue();
+            Menu foundMenu = menuExtractTool.extractMenuByMenuName(menus, menuName);
+            if (foundMenu != null && foundMenu.menuType().equals(menuType)) {
+                totalOrderCount += count;
+            }
+        }
+        return totalOrderCount * cost;
+    }
 }

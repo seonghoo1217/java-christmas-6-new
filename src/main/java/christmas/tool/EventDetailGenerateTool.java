@@ -46,6 +46,10 @@ public class EventDetailGenerateTool {
     }
 
     private void generatePromotionDetail(List<Event> events) {
+        if (events.stream().allMatch(e -> e.getPromotionContetns().equals(NO_PROMOTION_CONTENTS))) {
+            notPromotionDetail();
+            return;
+        }
         sb.append(PROMOTION_DETAILS);
         appendLineBreak();
         for (Event e : events) {
@@ -59,6 +63,10 @@ public class EventDetailGenerateTool {
     }
 
     private void generateTotalPromotionAmount(Integer totalPromotionAmount) {
+        if (totalPromotionAmount == 0) {
+            notPromotionAmount();
+            return;
+        }
         sb.append(PROMOTION_AMOUNT);
         appendLineBreak();
         sb.append(PROMOTION_AMOUNT_PREFIX).append(StringFormatTool.parsingCostFormatWon(totalPromotionAmount));

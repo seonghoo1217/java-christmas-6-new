@@ -10,4 +10,5 @@ public class ErrorProperty {
     public static final String ERROR_ORDER_COUNT = errorPrefix + "주문은 최소 1개 최대 20개를 주문해 주세요.";
     public static final String ERROR_TOO_MANY_ORDER = errorPrefix + "그렇게 많은 주문은 하실 수 없습니다.";
     public static final String ERROR_ORDER_ONLY_BEVERAGE = errorPrefix + "음료만 주문 하실 수 없습니다.";
+    public static final String ERROR_CONTAIN_SPACE_VALUE = errorPrefix + "공백제거 후 다시 주문해주세요.";
 }

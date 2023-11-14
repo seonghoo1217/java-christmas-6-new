@@ -6,7 +6,7 @@ import static christmas.domain.menu.MenuType.*;
 
 public enum MenuProperty {
     양송이수프("양송이수프", 6000, APPETIZER),
-    타파스("타파스", 5000, APPETIZER),
+    타파스("타파스", 5500, APPETIZER),
     시저샐러드("시저샐러드", 8000, APPETIZER),
     티본스테이크("티본스테이크", 55000, MAIN_DISH),
     바비큐립("바비큐립", 54000, MAIN_DISH),

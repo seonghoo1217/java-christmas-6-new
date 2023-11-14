@@ -4,15 +4,16 @@ import christmas.tool.StringFormatTool;
 
 import java.util.Map;
 
-import static christmas.view.property.OutputProperty.*;
+import static christmas.view.property.OutputProperty.ORDER_MENUS;
+import static christmas.view.property.OutputProperty.TOTAL_AMOUNT;
 
 public class OutputView {
     public static void outputForInputErrorMessage(IllegalArgumentException e) {
         System.out.println(e.getMessage());
     }
 
-    public void outputForEventNotice() {
-        System.out.println(EVENT_NOTICE);
+    public void outputForEventNotice(String eventNotice) {
+        System.out.println();
         outputForLineBreak();
     }
 
@@ -25,6 +26,11 @@ public class OutputView {
     public void outputForTotalAmount(Integer totalAmount) {
         System.out.println(TOTAL_AMOUNT);
         System.out.println(StringFormatTool.parsingCostFormatWon(totalAmount));
+        outputForLineBreak();
+    }
+
+    public void outputForEventResult(String eventResult) {
+        System.out.println(eventResult);
     }
 
     private void outputForLineBreak() {

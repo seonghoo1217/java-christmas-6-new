@@ -10,4 +10,8 @@ public class StringFormatTool {
                 .replace("₩", "")
                 .concat("원");
     }
+
+    public static String parsingBracesRemove(String target) {
+        return target.replace("[", "").replace("]", "");
+    }
 }

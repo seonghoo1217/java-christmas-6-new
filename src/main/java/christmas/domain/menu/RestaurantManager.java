@@ -12,15 +12,15 @@ import java.util.Map;
 public class RestaurantManager {
 
     private static final List<Menu> menus = new ArrayList<>();
-    private final Order order;
+    private Order order;
+    private final String orderMenus;
 
     private static final MenuExtractTool menuExtractTool = new MenuExtractTool();
 
     public RestaurantManager(String orderMenus) {
         initializeRestaurantMenu();
         validate(orderMenus);
-        Map<String, Integer> orderStatus = menuExtractTool.extractOrderStatus(orderMenus);
-        order = new Order(orderStatus, menuExtractTool.extractTotalAmount(orderStatus, orderMenus));
+        this.orderMenus = orderMenus;
     }
 
     public void addMenu(Menu menu) {
@@ -38,12 +38,9 @@ public class RestaurantManager {
         menuValidation.verifyForMenus(orderMenus);
     }
 
-    public static List<Menu> getMenus() {
-        return menus;
-    }
-
-    public Order getOrder() {
-        return order;
+    public void addOrder() {
+        Map<String, Integer> orderStatus = menuExtractTool.extractOrderStatus(orderMenus);
+        this.order = new Order(orderStatus, menuExtractTool.extractTotalAmount(orderStatus));
     }
 
     public Integer promotionDiscountWeekOfDay(MenuType menuType, Integer cost) {
@@ -58,5 +55,13 @@ public class RestaurantManager {
             }
         }
         return totalOrderCount * cost;
+    }
+
+    public static List<Menu> getMenus() {
+        return menus;
+    }
+
+    public Order getOrder() {
+        return order;
     }
 }

@@ -16,10 +16,24 @@ public class EventDetailGenerateTool {
         LinkedList<Event> events = eventManager.getEvents();
 
         generatePresentMenu(Objects.requireNonNull(events.poll()));
+        if (events.isEmpty()) {
+            notPromotionTarget(totalAmount);
+            return this.sb.toString();
+        }
+        promotionTarget(eventManager, events, totalAmount);
+        return this.sb.toString();
+    }
+
+    private void promotionTarget(EventManager eventManager, LinkedList<Event> events, Integer totalAmount) {
         generatePromotionDetail(events);
         generateTotalPromotionAmount(eventManager.promotionAmount(events));
         generatePromotionResultAmount(eventManager.promotionAmountWithOut(events), totalAmount);
-        return this.sb.toString();
+    }
+
+    private void notPromotionTarget(Integer totalAmount) {
+        notPromotionDetail();
+        notPromotionAmount();
+        notAfterPromotionAmount(totalAmount);
     }
 
     private void generatePresentMenu(Event event) {
@@ -54,6 +68,29 @@ public class EventDetailGenerateTool {
         sb.append(AFTER_PAYMENT_AMOUNT);
         appendLineBreak();
         sb.append(StringFormatTool.parsingCostFormatWon(totalAmount - totalPromotionAmount));
+        appendLineBreak();
+    }
+
+    private void notPromotionDetail() {
+        sb.append(PROMOTION_DETAILS);
+        appendLineBreak();
+        sb.append("없음");
+        appendLineBreak();
+        appendLineBreak();
+    }
+
+    private void notPromotionAmount() {
+        sb.append(PROMOTION_AMOUNT);
+        appendLineBreak();
+        sb.append("0원");
+        appendLineBreak();
+        appendLineBreak();
+    }
+
+    private void notAfterPromotionAmount(Integer totalAmount) {
+        sb.append(AFTER_PAYMENT_AMOUNT);
+        appendLineBreak();
+        sb.append(totalAmount);
         appendLineBreak();
     }
 

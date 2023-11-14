@@ -9,18 +9,25 @@ import java.util.HashSet;
 import java.util.List;
 
 import static christmas.property.ErrorProperty.*;
-import static christmas.validation.property.ValidationProperty.*;
+import static christmas.validation.property.ValidationProperty.MAX_ORDER;
+import static christmas.validation.property.ValidationProperty.MIN_ORDER;
 
 public class MenuValidation {
 
     private static MenuExtractTool menuExtractTool = new MenuExtractTool();
 
-    public void verifyForMenus(String inputOrderMenus) {
-        String orderMenus = inputOrderMenus.replaceAll(DELIMITER, "");
+    public void verifyForMenus(String orderMenus) {
+        verifyForOrderContainSpace(orderMenus);
         verifyForOrderCorrectFormat(orderMenus);
         verifyForOrderMenuDuplicate(orderMenus);
         verifyForOrderCount(orderMenus);
         verifyForOrderOnlyBeverage(orderMenus);
+    }
+
+    private void verifyForOrderContainSpace(String orderMenus) {
+        if (!orderMenus.replaceAll(" ", "").equals(orderMenus)) {
+            throw new IllegalArgumentException(ERROR_CONTAIN_SPACE_VALUE);
+        }
     }
 
     private void verifyForOrderCorrectFormat(String orderMenus) {

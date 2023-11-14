@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static christmas.domain.event.property.PromotionProperty.*;
+import static christmas.view.property.OutputProperty.EVENT_NOTICE;
 
 public class MainController {
 
@@ -30,7 +31,12 @@ public class MainController {
     public void restaurantOpening() {
         Calendar calendar = inputView.readVisitDate();
         RestaurantManager restaurantManager = inputView.readOrderMenu();
-        outputView.outputForEventNotice();
+        restaurantManager.addOrder();
+        orderReceivedByManager(calendar, restaurantManager);
+    }
+
+    private void orderReceivedByManager(Calendar calendar, RestaurantManager restaurantManager) {
+        outputView.outputForEventNotice(EVENT_NOTICE.formatted(calendar.getDate()));
         outputView.outputForOrderMenus(restaurantManager.getOrder().orderStatus());
         outputView.outputForTotalAmount(restaurantManager.getOrder().totalAmount());
         orderIsPromotionTarget(calendar, restaurantManager);
@@ -38,11 +44,13 @@ public class MainController {
 
     private void orderIsPromotionTarget(Calendar calendar, RestaurantManager restaurantManager) {
         EventDetailGenerateTool eventDetailGenerateTool = new EventDetailGenerateTool();
+        EventManager eventManager = promotionStop();
+
         if (eventPolicy.orderIsEventTarget(restaurantManager.getOrder().totalAmount())) {
-            EventManager eventManager = promotionProgress(calendar, restaurantManager);
-            String s = eventDetailGenerateTool.eventResultGenerate(eventManager, restaurantManager.getOrder().totalAmount());
-            System.out.println(s);
+            eventManager = promotionProgress(calendar, restaurantManager);
         }
+        String eventResult = eventDetailGenerateTool.eventResultGenerate(eventManager, restaurantManager.getOrder().totalAmount());
+        outputView.outputForEventResult(eventResult);
     }
 
     private EventManager promotionProgress(Calendar calendar, RestaurantManager restaurantManager) {
@@ -88,7 +96,9 @@ public class MainController {
         );
     }
 
-    private void promotionDetails(EventManager eventManager) {
-        outputView.outputForPromotion(eventManager);
+    private EventManager promotionStop() {
+        EventManager eventManager = new EventManager();
+        eventManager.addEvent(new Event(NO_PROMOTION_PRICE, NO_PROMOTION_CONTENTS));
+        return eventManager;
     }
 }

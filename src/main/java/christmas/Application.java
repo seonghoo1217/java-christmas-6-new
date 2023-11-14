@@ -1,5 +1,6 @@
-package christmas.controller;
+package christmas;
 
+import christmas.controller.MainController;
 import christmas.core.EventCheckPolicy;
 import christmas.core.EventPolicy;
 import christmas.view.InputView;

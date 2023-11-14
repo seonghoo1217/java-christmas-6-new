@@ -1,7 +1,6 @@
 package christmas;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import christmas.controller.Application;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;

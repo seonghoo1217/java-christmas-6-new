@@ -9,9 +9,12 @@ public class Calendar {
     private Integer date;
     private DayOfWeek dayOfWeek;
 
+    private SpecialPromotion specialPromotion;
+
     public Calendar(String inputDate, int year, int month) {
         this.date = parsingDateFormat(inputDate);
         this.dayOfWeek = caclulateDayOfWeek(year, month, this.date);
+        this.specialPromotion = pickDateIsSpecialPromotionTarget();
     }
 
     private Integer parsingDateFormat(String inputDate) {
@@ -28,11 +31,25 @@ public class Calendar {
         return LocalDate.of(year, month, day).getDayOfWeek();
     }
 
+    private SpecialPromotion pickDateIsSpecialPromotionTarget() {
+        if (this.dayOfWeek == DayOfWeek.SUNDAY) {
+            return SpecialPromotion.TARGET;
+        }
+        if (this.date == 25) {
+            return SpecialPromotion.TARGET;
+        }
+        return SpecialPromotion.NONE;
+    }
+
     public Integer getDate() {
         return date;
     }
 
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
+    }
+
+    public SpecialPromotion getSpecialPromotion() {
+        return specialPromotion;
     }
 }

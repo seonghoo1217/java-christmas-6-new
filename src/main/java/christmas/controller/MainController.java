@@ -8,6 +8,8 @@ import christmas.domain.menu.RestaurantManager;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
+import static christmas.domain.event.property.PromotionProperty.*;
+
 public class MainController {
 
     private final InputView inputView;
@@ -41,12 +43,8 @@ public class MainController {
 
     private Event promotionByPresentation(Integer totalAmount) {
         if (eventPolicy.giveAwayEvent(totalAmount)) {
-            return Event.PRESENTATION;
+            return new Event(PRESENTATION_PRICE, PRESENTATION_CONTENTS);
         }
-        return Event.NO_PROMOTION;
-    }
-
-    private void promotionDetails(EventManager eventManager) {
-        outputView.outputForPromotion(eventManager);
+        return new Event(NO_PROMOTION_PRICE, NO_PROMOTION_CONTENTS);
     }
 }

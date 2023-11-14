@@ -1,15 +1,10 @@
 package christmas.domain.event;
 
-import static christmas.domain.event.property.PromotionProperty.*;
-
-public enum Event {
-    NO_PROMOTION(NO_PROMOTION_PRICE, NO_PROMOTION_CONTENTS),
-    PRESENTATION(PRESENTATION_PRICE, PRESENTATION_CONTENTS);
-
+public class Event {
     private final Integer promotionPrice;
     private final String promotionContetns;
 
-    Event(Integer promotionPrice, String promotionContetns) {
+    public Event(Integer promotionPrice, String promotionContetns) {
         this.promotionPrice = promotionPrice;
         this.promotionContetns = promotionContetns;
     }

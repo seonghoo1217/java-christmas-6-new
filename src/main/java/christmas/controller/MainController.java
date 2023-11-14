@@ -40,7 +40,7 @@ public class MainController {
         EventDetailGenerateTool eventDetailGenerateTool = new EventDetailGenerateTool();
         if (eventPolicy.orderIsEventTarget(restaurantManager.getOrder().totalAmount())) {
             EventManager eventManager = promotionProgress(calendar, restaurantManager);
-            String s = eventDetailGenerateTool.eventResultGenerate(eventManager);
+            String s = eventDetailGenerateTool.eventResultGenerate(eventManager, restaurantManager.getOrder().totalAmount());
             System.out.println(s);
         }
     }

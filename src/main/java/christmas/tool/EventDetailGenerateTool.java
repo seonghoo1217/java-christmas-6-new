@@ -12,10 +12,13 @@ import static christmas.view.property.OutputProperty.*;
 public class EventDetailGenerateTool {
     public final StringBuilder sb = new StringBuilder();
 
-    public String eventResultGenerate(EventManager eventManager) {
+    public String eventResultGenerate(EventManager eventManager, Integer totalAmount) {
         LinkedList<Event> events = eventManager.getEvents();
+
         generatePresentMenu(Objects.requireNonNull(events.poll()));
         generatePromotionDetail(events);
+        generateTotalPromotionAmount(eventManager.promotionAmount(events));
+        generatePromotionResultAmount(eventManager.promotionAmountWithOut(events), totalAmount);
         return this.sb.toString();
     }
 
@@ -28,24 +31,29 @@ public class EventDetailGenerateTool {
     }
 
     private void generatePromotionDetail(List<Event> events) {
-        Integer totalPromotionAmount = 0;
         sb.append(PROMOTION_DETAILS);
         appendLineBreak();
         for (Event e : events) {
-            totalPromotionAmount += e.getPromotionPrice();
             sb.append(e.getPromotionContetns()).append(" : ")
                     .append(PROMOTION_AMOUNT_PREFIX)
                     .append(StringFormatTool.parsingCostFormatWon(e.getPromotionPrice()));
             appendLineBreak();
         }
         appendLineBreak();
-        generateTotalPromotionAmount(totalPromotionAmount);
     }
 
     private void generateTotalPromotionAmount(Integer totalPromotionAmount) {
         sb.append(PROMOTION_AMOUNT);
         appendLineBreak();
-        sb.append(StringFormatTool.parsingCostFormatWon(totalPromotionAmount));
+        sb.append(PROMOTION_AMOUNT_PREFIX).append(StringFormatTool.parsingCostFormatWon(totalPromotionAmount));
+        appendLineBreak();
+        appendLineBreak();
+    }
+
+    private void generatePromotionResultAmount(Integer totalPromotionAmount, Integer totalAmount) {
+        sb.append(AFTER_PAYMENT_AMOUNT);
+        appendLineBreak();
+        sb.append(StringFormatTool.parsingCostFormatWon(totalAmount - totalPromotionAmount));
         appendLineBreak();
     }
 

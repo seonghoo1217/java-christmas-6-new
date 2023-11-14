@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import static christmas.domain.event.property.PromotionProperty.NO_PROMOTION_CONTENTS;
 import static christmas.view.property.OutputProperty.*;
 
 public class EventDetailGenerateTool {
@@ -48,6 +49,7 @@ public class EventDetailGenerateTool {
         sb.append(PROMOTION_DETAILS);
         appendLineBreak();
         for (Event e : events) {
+            if (e.getPromotionContetns().equals(NO_PROMOTION_CONTENTS)) continue;
             sb.append(e.getPromotionContetns()).append(" : ")
                     .append(PROMOTION_AMOUNT_PREFIX)
                     .append(StringFormatTool.parsingCostFormatWon(e.getPromotionPrice()));

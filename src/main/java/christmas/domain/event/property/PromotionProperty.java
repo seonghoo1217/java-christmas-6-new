@@ -13,5 +13,4 @@ public class PromotionProperty {
     public static final String WEEKEND_PROMOTION_CONTENTS = "주말 할인";
     public static final String SPECIAL_PROMOTION_CONTENTS = "특별 할인";
     public static final String PRESENTATION_DETAIL_CONTENTS = "증정 이벤트";
-    public static final Integer EVENT_TYPE_COUNT = 5;
 }

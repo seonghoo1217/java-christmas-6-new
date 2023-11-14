@@ -4,7 +4,6 @@ import christmas.core.EventPolicy;
 import christmas.domain.calender.Calendar;
 import christmas.domain.event.Event;
 import christmas.domain.event.EventManager;
-import christmas.domain.menu.MenuType;
 import christmas.domain.menu.RestaurantManager;
 import christmas.tool.EventDetailGenerateTool;
 import christmas.view.InputView;
@@ -21,11 +20,13 @@ public class MainController {
     private final InputView inputView;
     private final OutputView outputView;
     private final EventPolicy eventPolicy;
+    private final PromotionController promotionController;
 
     public MainController(InputView inputView, OutputView outputView, EventPolicy eventPolicy) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.eventPolicy = eventPolicy;
+        this.promotionController = new PromotionController(eventPolicy);
     }
 
     public void restaurantOpening() {
@@ -69,31 +70,11 @@ public class MainController {
 
     private List<Event> promotionDetails(Calendar calendar, Integer totalAmount, RestaurantManager restaurantManager) {
         List<Event> promotionDetails = new ArrayList<>();
-        promotionDetails.add(new Event(eventPolicy.christmasDDayPromotion(calendar), D_DAY_PROMOTION_CONTENTS));
-        promotionDetails.add(weekOrWeekendPromotion(calendar, restaurantManager));
-        promotionDetails.add(new Event(eventPolicy.dateIsSpecialPromotionTarget(calendar), SPECIAL_PROMOTION_CONTENTS));
-        promotionDetails.add(orderCostIsOverPresentation(totalAmount));
+        promotionDetails.add(promotionController.dDayPromotion(calendar));
+        promotionDetails.add(promotionController.weekOrWeekendPromotion(calendar, restaurantManager));
+        promotionDetails.add(promotionController.specialPromotion(calendar));
+        promotionDetails.add(promotionController.presentPromotion(totalAmount));
         return promotionDetails;
-    }
-
-    private Event orderCostIsOverPresentation(Integer totalAmount) {
-        if (promotionByPresentation(totalAmount)) {
-            return new Event(PRESENTATION_PRICE, PRESENTATION_DETAIL_CONTENTS);
-        }
-        return new Event(NO_PROMOTION_PRICE, NO_PROMOTION_CONTENTS);
-    }
-
-    private Event weekOrWeekendPromotion(Calendar calendar, RestaurantManager restaurantManager) {
-        if (eventPolicy.dateIsWeekDay(calendar)) {
-            return new Event(restaurantManager.promotionDiscountWeekOfDay(
-                    MenuType.DESSERT, WEEK_OR_WEEKEND_PROMOTION_PRICE),
-                    WEEKDAY_PROMOTION_CONTENTS
-            );
-        }
-        return new Event(restaurantManager.promotionDiscountWeekOfDay(
-                MenuType.MAIN_DISH, WEEK_OR_WEEKEND_PROMOTION_PRICE),
-                WEEKEND_PROMOTION_CONTENTS
-        );
     }
 
     private EventManager promotionStop() {

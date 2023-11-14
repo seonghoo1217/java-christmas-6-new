@@ -1,7 +1,7 @@
 package christmas.view;
 
-import java.text.NumberFormat;
-import java.util.Locale;
+import christmas.tool.StringFormatTool;
+
 import java.util.Map;
 
 import static christmas.view.property.OutputProperty.*;
@@ -24,10 +24,7 @@ public class OutputView {
 
     public void outputForTotalAmount(Integer totalAmount) {
         System.out.println(TOTAL_AMOUNT);
-        String beforeDiscountAmount = NumberFormat.getCurrencyInstance(Locale.KOREA).format(totalAmount)
-                .replace("₩", "")
-                .concat("원");
-        System.out.println(beforeDiscountAmount);
+        System.out.println(StringFormatTool.parsingCostFormatWon(totalAmount));
     }
 
     private void outputForLineBreak() {

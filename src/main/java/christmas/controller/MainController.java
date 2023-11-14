@@ -8,6 +8,9 @@ import christmas.domain.menu.RestaurantManager;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static christmas.domain.event.property.PromotionProperty.*;
 
 public class MainController {
@@ -28,6 +31,7 @@ public class MainController {
         outputView.outputForEventNotice();
         outputView.outputForOrderMenus(restaurantManager.getOrder().orderStatus());
         outputView.outputForTotalAmount(restaurantManager.getOrder().totalAmount());
+        orderIsPromotionTarget(calendar, restaurantManager);
     }
 
     private void orderIsPromotionTarget(Calendar calendar, RestaurantManager restaurantManager) {
@@ -38,13 +42,47 @@ public class MainController {
 
     private void promotionProgress(Calendar calendar, RestaurantManager restaurantManager) {
         EventManager eventManager = new EventManager();
-        eventManager.addEvent(promotionByPresentation(restaurantManager.getOrder().totalAmount()));
+        Integer totalAmount = restaurantManager.getOrder().totalAmount();
+        if (promotionByPresentation(totalAmount)) {
+            eventManager.addEvent(new Event(PRESENTATION_PRICE, PRESENTATION_CONTENTS));
+            eventManager.addEventDetails(promotionDetails(calendar, totalAmount));
+        }
+        for (Event e : eventManager.getEvents()) {
+            System.out.println("============");
+            System.out.println(e.getPromotionContetns());
+            System.out.println(e.getPromotionPrice());
+            System.out.println("============");
+        }
     }
 
-    private Event promotionByPresentation(Integer totalAmount) {
-        if (eventPolicy.giveAwayEvent(totalAmount)) {
-            return new Event(PRESENTATION_PRICE, PRESENTATION_CONTENTS);
+    private boolean promotionByPresentation(Integer totalAmount) {
+        return eventPolicy.giveAwayEvent(totalAmount);
+    }
+
+    private List<Event> promotionDetails(Calendar calendar, Integer totalAmount) {
+        List<Event> promotionDetails = new ArrayList<>();
+        promotionDetails.add(new Event(eventPolicy.christmasDDayPromotion(calendar), D_DAY_PROMOTION_CONTENTS));
+        promotionDetails.add(weekOrWeekendPromotion(calendar));
+        promotionDetails.add(new Event(eventPolicy.dateIsSpecialPromotionTarget(calendar), SPECIAL_PROMOTION_CONTENTS));
+        promotionDetails.add(orderCostIsOverPresentation(totalAmount));
+        return promotionDetails;
+    }
+
+    private Event orderCostIsOverPresentation(Integer totalAmount) {
+        if (promotionByPresentation(totalAmount)) {
+            return new Event(PRESENTATION_PRICE, PRESENTATION_DETAIL_CONTENTS);
         }
         return new Event(NO_PROMOTION_PRICE, NO_PROMOTION_CONTENTS);
+    }
+
+    private Event weekOrWeekendPromotion(Calendar calendar) {
+        if (eventPolicy.dateIsWeekDay(calendar)) {
+            return new Event(WEEK_OR_WEEKEND_PROMOTION_PRICE, WEEKDAY_PROMOTION_CONTENTS);
+        }
+        return new Event(WEEK_OR_WEEKEND_PROMOTION_PRICE, WEEKEND_PROMOTION_CONTENTS);
+    }
+
+    private void promotionDetails(EventManager eventManager) {
+        outputView.outputForPromotion(eventManager);
     }
 }

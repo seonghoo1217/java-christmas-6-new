@@ -1,6 +1,7 @@
 package christmas.domain.event;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class EventManager {
     private final LinkedList<Event> events = new LinkedList<>();
@@ -10,6 +11,10 @@ public class EventManager {
 
     public void addEvent(Event event) {
         events.add(event);
+    }
+
+    public void addEventDetails(List<Event> eventsDetail) {
+        events.addAll(eventsDetail);
     }
 
     public LinkedList<Event> getEvents() {

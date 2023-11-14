@@ -24,7 +24,6 @@ public class EventCheckPolicy implements EventPolicy {
     public Integer christmasDDayPromotion(Calendar calendar) {
         Integer date = calendar.getDate();
         if (date > D_DAY_STANDARD) return 0;
-        System.out.println(((date - 1) * 100) + 1000);
         return ((date - 1) * 100) + 1000;
     }
 

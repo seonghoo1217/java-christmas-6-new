@@ -1,7 +1,6 @@
 package christmas.validation;
 
 import christmas.domain.menu.RestaurantManager;
-import christmas.property.ErrorProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,8 +24,7 @@ public class MenuValidationTest {
         assertThatThrownBy(() -> {
                     new RestaurantManager(targetOrder);
                 }
-        ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorProperty.ERROR_ORDER_NOT_CORRECT_FORMAT);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -37,8 +35,7 @@ public class MenuValidationTest {
         assertThatThrownBy(() -> {
                     new RestaurantManager(targetOrder);
                 }
-        ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorProperty.ERROR_ORDER_IS_DUPLICATE);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -49,8 +46,7 @@ public class MenuValidationTest {
         assertThatThrownBy(() -> {
                     new RestaurantManager(targetOrder);
                 }
-        ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorProperty.ERROR_ORDER_COUNT);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -61,8 +57,7 @@ public class MenuValidationTest {
         assertThatThrownBy(() -> {
                     new RestaurantManager(targetOrder);
                 }
-        ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorProperty.ERROR_ORDER_COUNT);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -74,8 +69,7 @@ public class MenuValidationTest {
         assertThatThrownBy(() -> {
                     new RestaurantManager(targetOrder);
                 }
-        ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorProperty.ERROR_ORDER_MENU_IS_NOT_EXIST);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -85,7 +79,6 @@ public class MenuValidationTest {
         assertThatThrownBy(() -> {
                     new RestaurantManager(targetOrder);
                 }
-        ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorProperty.ERROR_ORDER_ONLY_BEVERAGE);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }

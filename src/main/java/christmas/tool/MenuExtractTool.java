@@ -7,7 +7,7 @@ import christmas.domain.menu.RestaurantManager;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static christmas.property.ErrorProperty.ERROR_TOO_MANY_ORDER;
+import static christmas.property.ErrorProperty.ERROR_INVALIDATE_ORDER_MENU_INPUT;
 
 public class MenuExtractTool {
     public List<MenuType> extractMenuType(String orderMenus) {
@@ -40,7 +40,7 @@ public class MenuExtractTool {
             orderCount = Long.parseLong(item.split("-")[1]);
         }
         if (orderCount > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException(ERROR_TOO_MANY_ORDER);
+            throw new IllegalArgumentException(ERROR_INVALIDATE_ORDER_MENU_INPUT);
         }
         return (int) orderCount;
     }

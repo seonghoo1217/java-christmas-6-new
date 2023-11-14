@@ -8,7 +8,8 @@ import christmas.tool.MenuExtractTool;
 import java.util.HashSet;
 import java.util.List;
 
-import static christmas.property.ErrorProperty.*;
+import static christmas.property.ErrorProperty.ERROR_CONTAIN_SPACE_VALUE;
+import static christmas.property.ErrorProperty.ERROR_INVALIDATE_ORDER_MENU_INPUT;
 import static christmas.validation.property.ValidationProperty.MAX_ORDER;
 import static christmas.validation.property.ValidationProperty.MIN_ORDER;
 
@@ -32,21 +33,21 @@ public class MenuValidation {
 
     private void verifyForOrderCorrectFormat(String orderMenus) {
         if (!orderMenus.matches("^([가-힣a-zA-Z0-9]+-\\d+)(,[가-힣a-zA-Z0-9]+-\\d+)*$")) {
-            throw new IllegalArgumentException(ERROR_ORDER_NOT_CORRECT_FORMAT);
+            throw new IllegalArgumentException(ERROR_INVALIDATE_ORDER_MENU_INPUT);
         }
     }
 
     private void verifyForOrderMenuDuplicate(String orderMenus) {
         List<String> menuNames = menuExtractTool.extractMenuNames(orderMenus);
         if (menuNames.size() != new HashSet<>(menuNames).size()) {
-            throw new IllegalArgumentException(ERROR_ORDER_IS_DUPLICATE);
+            throw new IllegalArgumentException(ERROR_INVALIDATE_ORDER_MENU_INPUT);
         }
         verifyForOrderMenuExist(menuNames);
     }
 
     private void verifyForOrderMenuExist(List<String> orderMenuNames) {
         if (!menuNameIsExist(orderMenuNames)) {
-            throw new IllegalArgumentException(ERROR_ORDER_MENU_IS_NOT_EXIST);
+            throw new IllegalArgumentException(ERROR_INVALIDATE_ORDER_MENU_INPUT);
         }
     }
 
@@ -54,14 +55,14 @@ public class MenuValidation {
     private void verifyForOrderCount(String orderMenus) {
         int orderCount = menuExtractTool.extractOrderCount(orderMenus);
         if (orderCount < MIN_ORDER || orderCount > MAX_ORDER) {
-            throw new IllegalArgumentException(ERROR_ORDER_COUNT);
+            throw new IllegalArgumentException(ERROR_INVALIDATE_ORDER_MENU_INPUT);
         }
     }
 
     private void verifyForOrderOnlyBeverage(String orderMenus) {
         List<MenuType> menuTypes = menuExtractTool.extractMenuType(orderMenus);
         if (menusIsOnlyBeverage(menuTypes)) {
-            throw new IllegalArgumentException(ERROR_ORDER_ONLY_BEVERAGE);
+            throw new IllegalArgumentException(ERROR_INVALIDATE_ORDER_MENU_INPUT);
         }
     }
 

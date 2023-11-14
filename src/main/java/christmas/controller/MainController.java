@@ -47,12 +47,6 @@ public class MainController {
             eventManager.addEvent(new Event(PRESENTATION_PRICE, PRESENTATION_CONTENTS));
             eventManager.addEventDetails(promotionDetails(calendar, totalAmount));
         }
-        for (Event e : eventManager.getEvents()) {
-            System.out.println("============");
-            System.out.println(e.getPromotionContetns());
-            System.out.println(e.getPromotionPrice());
-            System.out.println("============");
-        }
     }
 
     private boolean promotionByPresentation(Integer totalAmount) {

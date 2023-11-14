@@ -1,5 +1,6 @@
 package christmas.tool;
 
+import christmas.domain.event.Badge;
 import christmas.domain.event.Event;
 import christmas.domain.event.EventManager;
 
@@ -26,15 +27,18 @@ public class EventDetailGenerateTool {
     }
 
     private void promotionTarget(EventManager eventManager, LinkedList<Event> events, Integer totalAmount) {
+        Integer promotionAmount = eventManager.promotionAmount(events);
         generatePromotionDetail(events);
-        generateTotalPromotionAmount(eventManager.promotionAmount(events));
+        generateTotalPromotionAmount(promotionAmount);
         generatePromotionResultAmount(eventManager.promotionAmountWithOut(events), totalAmount);
+        generateBadge(promotionAmount);
     }
 
     private void notPromotionTarget(Integer totalAmount) {
         notPromotionDetail();
         notPromotionAmount();
         notAfterPromotionAmount(totalAmount);
+        generateBadge(0);
     }
 
     private void generatePresentMenu(Event event) {
@@ -79,6 +83,16 @@ public class EventDetailGenerateTool {
         appendLineBreak();
         sb.append(StringFormatTool.parsingCostFormatWon(totalAmount - totalPromotionAmount));
         appendLineBreak();
+        appendLineBreak();
+    }
+
+    private void generateBadge(Integer totalPromotionAmount) {
+        sb.append(BADGE);
+        appendLineBreak();
+        if (totalPromotionAmount < 5000) {
+            sb.append("없음");
+        }
+        sb.append(Badge.rewardBadge(totalPromotionAmount));
     }
 
     private void notPromotionDetail() {
@@ -101,6 +115,7 @@ public class EventDetailGenerateTool {
         sb.append(AFTER_PAYMENT_AMOUNT);
         appendLineBreak();
         sb.append(totalAmount);
+        appendLineBreak();
         appendLineBreak();
     }
 

@@ -44,21 +44,21 @@ public class EventDetailGenerateTool {
     private void generatePresentMenu(Event event) {
         sb.append(PRESENT_MENU);
         appendLineBreak();
-        sb.append(event.promotionContetns());
+        sb.append(event.promotionContents());
         appendLineBreak();
         appendLineBreak();
     }
 
     private void generatePromotionDetail(List<Event> events) {
-        if (events.stream().allMatch(e -> e.promotionContetns().equals(NO_PROMOTION_CONTENTS))) {
+        if (events.stream().allMatch(e -> e.promotionContents().equals(NO_PROMOTION_CONTENTS))) {
             notPromotionDetail();
             return;
         }
         sb.append(PROMOTION_DETAILS);
         appendLineBreak();
         for (Event e : events) {
-            if (e.promotionContetns().equals(NO_PROMOTION_CONTENTS)) continue;
-            sb.append(e.promotionContetns()).append(" : ")
+            if (e.promotionContents().equals(NO_PROMOTION_CONTENTS)) continue;
+            sb.append(e.promotionContents()).append(" : ")
                     .append(PROMOTION_AMOUNT_PREFIX)
                     .append(StringFormatTool.parsingCostFormatWon(e.promotionPrice()));
             appendLineBreak();

@@ -27,7 +27,7 @@ public class EventManager {
 
     public Integer promotionAmountWithOut(List<Event> events) {
         return events.stream()
-                .filter(event -> !event.promotionContetns().equals("증정 이벤트"))
+                .filter(event -> !event.promotionContents().equals("증정 이벤트"))
                 .mapToInt(Event::promotionPrice)
                 .sum();
     }

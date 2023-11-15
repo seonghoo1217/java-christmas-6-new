@@ -1,4 +1,4 @@
 package christmas.domain.event;
 
-public record Event(Integer promotionPrice, String promotionContetns) {
+public record Event(Integer promotionPrice, String promotionContents) {
 }

@@ -1,7 +1,9 @@
 package christmas.domain;
 
+import christmas.domain.event.Badge;
 import christmas.domain.event.Event;
 import christmas.domain.event.EventManager;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -39,6 +41,54 @@ public class EventTest {
 
         //then
         assertThat(promotionAmount).isEqualTo(6046);
+    }
+
+    @Test
+    void Badge_총_금액을_통해_생성_별_인_경우() {
+        //given
+        Integer promotionAmount = 5000;
+
+        //when
+        Badge rewardBadge = Badge.rewardBadge(promotionAmount);
+
+        //then
+        assertThat(rewardBadge).isEqualTo(Badge.별);
+    }
+
+    @Test
+    void Badge_총_금액을_통해_생성_나무_인_경우() {
+        //given
+        Integer promotionAmount = 10000;
+
+        //when
+        Badge rewardBadge = Badge.rewardBadge(promotionAmount);
+
+        //then
+        assertThat(rewardBadge).isEqualTo(Badge.나무);
+    }
+
+    @Test
+    void Badge_총_금액을_통해_생성_산타_인_경우() {
+        //given
+        Integer promotionAmount = 20000;
+
+        //when
+        Badge rewardBadge = Badge.rewardBadge(promotionAmount);
+
+        //then
+        assertThat(rewardBadge).isEqualTo(Badge.산타);
+    }
+
+    @Test
+    void Badge_총_금액을_통해_생성_없음_인_경우() {
+        //given
+        Integer promotionAmount = 3000;
+
+        //when
+        Badge rewardBadge = Badge.rewardBadge(promotionAmount);
+
+        //then
+        assertThat(rewardBadge).isEqualTo(Badge.없음);
     }
 
 

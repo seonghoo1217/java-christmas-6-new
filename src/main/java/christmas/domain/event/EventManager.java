@@ -26,13 +26,13 @@ public class EventManager {
     }
 
     public Integer promotionAmount(List<Event> events) {
-        return events.stream().mapToInt(Event::getPromotionPrice).sum();
+        return events.stream().mapToInt(Event::promotionPrice).sum();
     }
 
     public Integer promotionAmountWithOut(List<Event> events) {
         return events.stream()
-                .filter(event -> !event.getPromotionContetns().equals("증정 이벤트"))
-                .mapToInt(Event::getPromotionPrice)
+                .filter(event -> !event.promotionContetns().equals("증정 이벤트"))
+                .mapToInt(Event::promotionPrice)
                 .sum();
     }
 }

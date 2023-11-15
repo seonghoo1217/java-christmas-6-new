@@ -20,7 +20,7 @@ public class CalendarTest {
         Calendar calendar = new Calendar(inputDate, year, month);
 
         //then
-        assertThat(calendar.getSpecialPromotion()).isEqualTo(SpecialPromotion.TARGET);
+        assertThat(calendar.isSpecialPromotion(calendar)).isEqualTo(SpecialPromotion.TARGET);
     }
 
     @ParameterizedTest

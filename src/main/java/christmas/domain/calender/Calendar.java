@@ -49,7 +49,10 @@ public class Calendar {
         return dayOfWeek;
     }
 
-    public SpecialPromotion getSpecialPromotion() {
-        return specialPromotion;
+    public SpecialPromotion isSpecialPromotion(Calendar calendar) {
+        if (calendar.getDate() == 25 || calendar.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+            return SpecialPromotion.TARGET;
+        }
+        return SpecialPromotion.NONE;
     }
 }

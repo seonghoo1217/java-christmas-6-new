@@ -35,7 +35,7 @@ public class EventCheckPolicy implements EventPolicy {
 
     @Override
     public Integer dateIsSpecialPromotionTarget(Calendar calendar) {
-        if (calendar.getSpecialPromotion().equals(SpecialPromotion.TARGET)) {
+        if (calendar.isSpecialPromotion(calendar).equals(SpecialPromotion.TARGET)) {
             return 1000;
         }
         return 0;

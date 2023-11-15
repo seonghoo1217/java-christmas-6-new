@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static christmas.domain.event.property.PromotionProperty.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EventManagerTest {
+public class EventTest {
 
     @ParameterizedTest
     @MethodSource("generateEvents")

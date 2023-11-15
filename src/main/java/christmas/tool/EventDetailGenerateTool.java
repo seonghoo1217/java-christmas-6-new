@@ -89,10 +89,6 @@ public class EventDetailGenerateTool {
     private void generateBadge(Integer totalPromotionAmount) {
         sb.append(BADGE);
         appendLineBreak();
-        if (totalPromotionAmount < 5000) {
-            sb.append("없음");
-            return;
-        }
         sb.append(Badge.rewardBadge(totalPromotionAmount));
     }
 

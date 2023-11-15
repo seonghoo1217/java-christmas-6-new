@@ -4,8 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.calender.Calendar;
 import christmas.domain.menu.RestaurantManager;
 
-import java.util.NoSuchElementException;
-
 import static christmas.view.property.InputProperty.*;
 
 public class InputView {
@@ -19,9 +17,6 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             OutputView.outputForInputErrorMessage(e);
             return readVisitDate();
-        } catch (NoSuchElementException e) {
-            System.out.println(APPLICATION_SHUTDOWN_IN_ORDER);
-            return null;
         }
     }
 
@@ -32,9 +27,6 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             OutputView.outputForInputErrorMessage(e);
             return readOrderMenu();
-        } catch (NoSuchElementException e) {
-            System.out.println(APPLICATION_SHUTDOWN_IN_ORDER);
-            return null;
         }
     }
 }

@@ -45,6 +45,16 @@ public class EventPolicyTest {
         assertThat(promotionAmount).isEqualTo(3400);
     }
 
+    @Test
+    void EventPolicy_평일_판별_로직_테스트() {
+        //given
+        Calendar calendar = new Calendar("25", 2023, 12);
+
+        //when
+        boolean dateIsWeekDay = eventPolicy().dateIsWeekDay(calendar);
+        assertThat(dateIsWeekDay).isTrue();
+    }
+
     private EventPolicy eventPolicy() {
         return new EventCheckPolicy();
     }

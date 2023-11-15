@@ -4,9 +4,13 @@ import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.calender.Calendar;
 import christmas.domain.menu.RestaurantManager;
 
+import java.util.NoSuchElementException;
+
 import static christmas.view.property.InputProperty.*;
 
 public class InputView {
+
+    public static final String APPLICATION_SHUTDOWN_IN_ORDER = "프로그램 종료로 주문이 취소됩니다.";
 
     public Calendar readVisitDate() {
         System.out.println(RESTAURANT_OPEN);
@@ -15,6 +19,9 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             OutputView.outputForInputErrorMessage(e);
             return readVisitDate();
+        } catch (NoSuchElementException e) {
+            System.out.println(APPLICATION_SHUTDOWN_IN_ORDER);
+            return null;
         }
     }
 
@@ -25,6 +32,9 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             OutputView.outputForInputErrorMessage(e);
             return readOrderMenu();
+        } catch (NoSuchElementException e) {
+            System.out.println(APPLICATION_SHUTDOWN_IN_ORDER);
+            return null;
         }
     }
 }

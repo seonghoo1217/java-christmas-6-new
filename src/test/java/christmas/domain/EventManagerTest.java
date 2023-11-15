@@ -28,13 +28,26 @@ public class EventManagerTest {
         assertThat(promotionAmount).isEqualTo(31046);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateEvents")
+    void Event_생성_후_프로모션_증정이벤트_제외_총_가격_로직_테스트(List<Event> events) {
+        //given
+        EventManager eventManager = new EventManager();
+
+        //when
+        Integer promotionAmount = eventManager.promotionAmountWithOut(events);
+
+        //then
+        assertThat(promotionAmount).isEqualTo(6046);
+    }
+
 
     static Stream<Arguments> generateEvents() {
         List<Event> events = new ArrayList<>();
         events.add(new Event(1000, D_DAY_PROMOTION_CONTENTS));
         events.add(new Event(4046, WEEKDAY_PROMOTION_CONTENTS));
         events.add(new Event(1000, SPECIAL_PROMOTION_CONTENTS));
-        events.add(new Event(PRESENTATION_PRICE, PRESENTATION_CONTENTS));
+        events.add(new Event(PRESENTATION_PRICE, PRESENTATION_DETAIL_CONTENTS));
         return Stream.of(
                 Arguments.arguments(events)
         );

@@ -36,7 +36,7 @@ public class EventPolicyTest {
     @Test
     void EventPolicy_디데이_프로모션_이벤트_테스트() {
         //given
-        Calendar calendar = new Calendar("25", 2023, 12);
+        Calendar calendar = calendar();
 
         //when
         Integer promotionAmount = eventPolicy().christmasDDayPromotion(calendar);
@@ -48,14 +48,29 @@ public class EventPolicyTest {
     @Test
     void EventPolicy_평일_판별_로직_테스트() {
         //given
-        Calendar calendar = new Calendar("25", 2023, 12);
-
+        Calendar calendar = calendar();
         //when
         boolean dateIsWeekDay = eventPolicy().dateIsWeekDay(calendar);
         assertThat(dateIsWeekDay).isTrue();
     }
 
+    @Test
+    void EventPolicy_이벤트_특별_할인_대상_판별_로직_테스트() {
+        //given
+        Calendar calendar = calendar();
+
+        //when
+        Integer promotionAmount = eventPolicy().dateIsSpecialPromotionTarget(calendar);
+
+        //then
+        assertThat(promotionAmount).isEqualTo(1000);
+    }
+
     private EventPolicy eventPolicy() {
         return new EventCheckPolicy();
+    }
+
+    private Calendar calendar() {
+        return new Calendar("25", 2023, 12);
     }
 }

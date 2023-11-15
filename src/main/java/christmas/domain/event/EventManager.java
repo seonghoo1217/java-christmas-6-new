@@ -21,10 +21,6 @@ public class EventManager {
         return events;
     }
 
-    public boolean orderIsNotPromotionTarget() {
-        return this.events.isEmpty();
-    }
-
     public Integer promotionAmount(List<Event> events) {
         return events.stream().mapToInt(Event::promotionPrice).sum();
     }

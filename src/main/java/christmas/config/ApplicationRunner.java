@@ -1,11 +1,12 @@
 package christmas.config;
 
+import christmas.db.InMemoryDBManager;
 import christmas.domain.menu.Menu;
 
 public class ApplicationRunner {
-    public void menuInitialize(){
+    public void menuInitialize(InMemoryDBManager inMemoryDBManager){
         for (OriginalMenus o : OriginalMenus.values()){
-            o.registerMenu();
+            inMemoryDBManager.saveMenu(1,o.registerMenu());
         }
     }
 }

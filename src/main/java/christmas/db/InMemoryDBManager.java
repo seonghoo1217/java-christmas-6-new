@@ -7,11 +7,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public class InMemoryDBManager {
     public static final ConcurrentHashMap<Integer, Menu> menuDB = new ConcurrentHashMap<>();
 
-    public Menu saveMenu(Integer menuKeys, Menu menu){
+    public ConcurrentHashMap<Integer, Menu> saveMenu(Integer menuKeys, Menu menu){
         if (menuDB.containsKey(menuKeys)){
             menuKeys++;
             saveMenu(menuKeys, menu);
         }
-        return saveMenu(menuKeys, menu);
+        menuDB.put(menuKeys, menu);
+        return menuDB;
     }
+
+
 }

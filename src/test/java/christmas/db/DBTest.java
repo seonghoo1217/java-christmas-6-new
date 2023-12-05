@@ -31,4 +31,16 @@ public class DBTest {
         //then
         assertThat(size).isEqualTo(12);
     }
+
+    @Test
+    public void 메뉴_DB_KEY_값_증가(){
+        //given
+        ConcurrentHashMap<Integer, Menu> menuDB = applicationRunner.menuInitialize(inMemoryDBManager);
+
+        //when
+        Menu menu = menuDB.get(12);
+
+        //then
+        assertThat(menu.name()).isEqualTo("샴페인");
+    }
 }

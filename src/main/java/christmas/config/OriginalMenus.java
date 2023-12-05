@@ -1,5 +1,6 @@
 package christmas.config;
 
+import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
 
 public enum OriginalMenus {
@@ -24,5 +25,9 @@ public enum OriginalMenus {
         this.name = name;
         this.cost = cost;
         this.menuType = menuType;
+    }
+
+    public Menu registerMenu(){
+        return new Menu(this.name, this.cost, this.menuType);
     }
 }

@@ -16,5 +16,7 @@ public class InMemoryDBManager {
         return menuDB;
     }
 
-
+    public ConcurrentHashMap<Integer, Menu> getMenuDB(){
+        return menuDB;
+    }
 }

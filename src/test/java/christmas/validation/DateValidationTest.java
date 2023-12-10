@@ -23,4 +23,12 @@ public class DateValidationTest {
             dateValidation.isValidate(date);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1000","12121212121212121"})
+    public void 숫자_범위_벗어난_경우_테스트(String date){
+        assertThatThrownBy(()->{
+            dateValidation.isValidate(date);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

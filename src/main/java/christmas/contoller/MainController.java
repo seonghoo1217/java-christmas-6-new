@@ -6,8 +6,11 @@ public class MainController {
 
     private final InMemoryDBManager inMemoryDBManager;
 
-    public MainController(InMemoryDBManager inMemoryDBManager) {
+    private final InputController inputController;
+
+    public MainController(InMemoryDBManager inMemoryDBManager, InputController inputController) {
         this.inMemoryDBManager = inMemoryDBManager;
+        this.inputController = inputController;
     }
 
     public void openingRestaurant(){

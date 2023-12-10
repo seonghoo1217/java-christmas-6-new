@@ -10,7 +10,7 @@ public class MainController {
         this.inMemoryDBManager = inMemoryDBManager;
     }
 
-    public void run(){
+    public void openingRestaurant(){
 
     }
 }
